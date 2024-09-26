@@ -1,0 +1,62 @@
+<%- include("partials/header.ejs") %>
+<div class="container">
+  <div class="mt-5 mb-5 d-flex justify-content-evenly">
+    <form action="/add-blog" method="GET">
+      <button class="btn btn-primary px-3" type="submit">Add</button>
+    </form>
+  </div>
+  <% var date = new Date(); %>
+  <% for (var i = 0; i < blogs.length; i += 2) { %>
+    <div class="row mb-2 mx-4">
+      <% for (var j = 0; j < 2; j++) {
+          var index = i + j;
+          if (index < blogs.length) { %> 
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary-emphasis"><%= blogs[index].field %></strong>
+                <h3 class="mb-0"><%= blogs[index].title %></h3>
+                <div class="mb-1 text-body-secondary"><%= date.toDateString() %></div>
+                <p class="card-text mb-auto"><%= blogs[index].para %></p>
+                <div class="card-bottom d-flex ">
+                  <a href="/edit-blog/<%= index %>" class="edit-button me-4" data-index="<%= index %>">
+                    <button class="btn btn-primary px-4">Edit</button>
+                  </a>
+                  <a href="/delete-blog/<%= index %>" class="delete-button" data-index="<%= index %>">
+                    <button class="btn btn-danger">Delete</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+  <% } %>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Use event delegation to handle dynamically generated buttons
+    $(document).on('click', '.delete-button', function (e) {
+      e.preventDefault();
+      var index = $(this).data('index');
+      deleteBlog(index);
+    });
+  });
+
+  function deleteBlog(index) {
+    fetch(`/delete-blog/${index}`, {
+      method: 'DELETE'
+    }).then(response => {
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        alert('Failed to delete blog');
+      }
+    });
+  }
+</script>
+
+<%- include("partials/footer.ejs") %>

@@ -1,0 +1,16 @@
+<%- include("partials/header.ejs")%>
+<div class="container d-flex flex-column align-items-center">
+  <form action="/add-submit" class="add-form d-flex flex-column align-items-center" method="POST" >
+    <label class="heading-3">Enter your title here :</label>
+    <input type="text" class="p-2 rounded-2 mb-3" placeholder="Title" name="title" required>
+    <p class="heading-3">Enter your field here :</p>
+    <input type="text" class="p-2 rounded-2 mb-3" placeholder="Field" name="field" required>
+    <p class="heading-3">Enter Blog para here :</p>
+    <textarea class="p-2 rounded-2 ms-4" cols="80" rows="10" name="para" required></textarea>
+    <!-- can accept one or more file extension -->
+    <!-- <input type="file" name="thumbnail" accept="image"> -->
+
+    <button class="btn btn-primary mt-4" type="submit">Submit</button>
+  </form>
+</div>
+<%- include("partials/footer.ejs")%>
