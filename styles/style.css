@@ -1,0 +1,23 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.search{
+    margin-left: 85px;
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid black; */
+}
+.search button{
+    border: none;
+    background-color: white;
+}
+.search input{
+    border: none;
+}
+.add-form input{
+    width: 300px;
+}
+/* .card-bottom button{
+    width: 200px;
+} */
